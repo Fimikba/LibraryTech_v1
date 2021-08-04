@@ -1,0 +1,90 @@
+﻿@using LibraryTechWebApp.Helpers
+@model LibraryTechWebApp.Models.ShowCartModel
+
+@{
+    ViewData["Title"] = "Cart";
+}
+
+<div>
+    <h3 class="text-center">Your cart</h3>
+    <hr />
+    @if (Model.Cart.Records.Count != 0)
+    {
+        <form asp-controller="PersonalAccount" asp-action="BuyBooks" method="post">
+            <table class="table table-hover">
+                <thead>
+                    <tr class="table-active">
+                        <th width="80%">Book</th>
+                        <th width="10%">Price</th>
+                        <th width="10%"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var record in Model.Cart.Records)
+                    {
+                        <tr class="table-secondary">
+                            <td>
+                                @record.Title
+                                <input type="hidden" name="records" value="@record.BookId">
+                            </td>
+                            <td>@record.Price.ToString("c")</td>
+                            <td>
+                                <a asp-controller="Cart" asp-action="RemoveFromCart" asp-route-bookId="@record.BookId" asp-route-returnUrl="@ViewContext.HttpContext.Request.PathAndQuery()" class="card-link btn btn-outline-danger">Delete</a>
+                            </td>
+                        </tr>
+                    }
+                    <tr class="table-active">
+                        <td colspan="2">Total coast</td>
+                        <td>@Model.Cart.TotalCoast.ToString("c")</td>
+                    </tr>
+                    @if (Model.TotalCoastWithDiscount!=0)
+                    {
+                    <tr class="table-active">
+                        <td colspan="2" class="text-success">Total coast with your personal discount</td>
+                        <td class="text-success">@Model.TotalCoastWithDiscount.ToString("c")</td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+            <h4></h4>
+
+            <div class="row justify-content-md-end">
+                <div class="col-md-auto mb-4">
+                    <a href="#" class="btn btn-success" onmousedown="viewDiv()">Proceed to checkout</a>
+                </div>
+                <div class="w-100 d-none d-md-block"></div>
+                <div class="col-md-5 mb-4" id="div1" style="display: none;">
+                    <div class="alert alert-dismissible alert-primary text-center">
+                        <h4 class="alert-heading text-center">Select a Payment Method</h4>
+                        <div class="row justify-content-md-center">
+                            <div class="col-md-auto mb-2">
+                                <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                                    <input type="radio" class="btn-check" name="paymentSystem" value="1" id="btnradio1" autocomplete="off" checked="">
+                                    <label class="btn btn-outline-light" for="btnradio1">Сredit сard</label>
+                                    <input type="radio" class="btn-check" name="paymentSystem" value="2" id="btnradio2" autocomplete="off" checked="">
+                                    <label class="btn btn-outline-light" for="btnradio2">PayPal</label>
+                                    <input type="radio" class="btn-check" name="paymentSystem" value="3" id="btnradio3" autocomplete="off" checked="">
+                                    <label class="btn btn-outline-light" for="btnradio3">Apple Pay</label>
+                                </div>
+                            </div>
+                            <div class="w-100 d-none d-md-block"></div>
+                            <div class="col-md-auto mb-2">
+                                <input type="submit" value="Pay" class="mb-0 btn btn-success" />
+                            </div>
+                        </div>
+                        @*<h4 class="alert-heading text-center">Choose a payment method</h4>
+                            <p class="mb-0 text-center">Choose an interesting book from the catalog and add it to the cart, you can also <a href="#" class="alert-link">purchase a subscription</a> and read your favorite books cheaper.</p>*@
+                    </div>
+                </div>
+            </div>
+        </form>
+    }
+
+    else
+    {
+    <div class="alert alert-dismissible alert-warning">
+        <h4 class="alert-heading text-center">Sorry, Your cart is empty :(</h4>
+        <p class="mb-0 text-center">Choose an interesting book from the catalog and add it to the cart, you can also <a href="#" class="alert-link">purchase a subscription</a> and read your favorite books cheaper.</p>
+    </div>
+    }
+    </div>

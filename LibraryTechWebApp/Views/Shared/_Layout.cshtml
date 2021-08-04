@@ -1,0 +1,89 @@
+﻿@using LibraryTechWebApp.Helpers
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - LibraryTech</title>
+    <link rel="shortcut icon" href="~/favicon.png" type="image/x-icon" />
+    <link rel="stylesheet" href="~/lib/bootstrap-dark/css/bootstrap.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container-fluid">
+                <img src="~/logo.png" clss="img-thumbnail" width="50" height="40">
+                <a class="navbar-brand" asp-controller="Home" asp-action="index">LIBRARYTECH</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarColor02">
+                    <ul class="navbar-nav me-auto">
+                        <div class="bs-component">
+                            <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+                                <a asp-controller="Book" asp-action="Index" type="button" class="btn btn-secondary">Books</a>
+                                <div class="btn-group" role="group">
+                                    <button id="btnGroupDrop4" type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                                    <div class="dropdown-menu" aria-labelledby="btnGroupDrop4">
+                                        @await Component.InvokeAsync("DropdownToggleCategory")
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+                                <button type="button" class="btn btn-secondary">Articles</button>
+                                <div class="btn-group" role="group">
+                                    <button id="btnGroupDrop4" type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                                    <div class="dropdown-menu" aria-labelledby="btnGroupDrop4">
+                                        @*<a class="dropdown-item" href="#">Dropdown link</a>
+                                        <a class="dropdown-item" href="#">Dropdown link</a>*@
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </ul>
+                    <div class="bs-component text-right">
+                        <div class="btn-group">
+                            @await Component.InvokeAsync("CartWidget")
+                        </div>
+                        <div class="btn-group">
+                            @await Component.InvokeAsync("AccountWidget")
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+   
+    <footer class="border-top footer text-muted navbar-fixed-bottom">
+        <div class="container">
+            <div class="row justify-content-md-center">
+                <div class="col-md-auto">
+                    <a class="btn btn-outline-light btn-sm" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                </div>
+                <div class="col-md-auto">
+                    <a class="btn btn-outline-light btn-sm" href="#">About us</a>
+                </div>
+                <div class="col-md-auto">
+                    <a class="btn btn-outline-light btn-sm" href="#">Contact</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="container text-center">
+            &copy; Copyriting 2021 - LibraryTech. All Right Reserved.
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap-dark/js/bootstrap.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

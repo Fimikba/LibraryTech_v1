@@ -1,0 +1,33 @@
+﻿@using LibraryTechWebApp.Helpers
+@model LibraryTechWebApp.Models.BookModel
+
+
+<div class="card border-light col-lg-3 mb-4 mx-2">
+    @*<h5 class="card-header text-center">@Model.Title</h5>*@
+
+    <div class="card-body" style="transform: rotate(0)">
+        <h5 class="card-title">@Model.Title</h5>
+        <h6 class="card-subtitle text-muted">@Model.Authors</h6>
+    </div>
+
+
+    <div class="card-body" style="transform: rotate(0)">
+        <img src="~/Books/Covers/@Model.ImageUrl" class="d-block user-select-none" clss="img-thumbnail d-block user-select-none" width="100%" height="100%">
+    </div>
+
+
+
+    <div class="card-body" style="transform: rotate(0)">
+        <p class="card-text">@Model.Description</p>
+    </div>
+
+    <div class="card-body text-center">   
+        <a asp-controller="PersonalAccount" asp-action="ReadBookBySubscription" asp-route-BookId="@Model.BookId">
+            <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-arrow-down-circle-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 5a.5.5 0 0 0-1 0v4.793L5.354 7.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 9.793V5z" />
+            </svg>
+        </a>
+    </div>
+</div>
+
+

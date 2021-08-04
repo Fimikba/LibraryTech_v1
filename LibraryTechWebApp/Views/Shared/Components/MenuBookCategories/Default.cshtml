@@ -1,0 +1,25 @@
+﻿@model MenuCategoriesOrSeriesModel
+
+<div class="btn-group">
+    @if (Model.ActiveCategory == null)
+    {
+        <a class="btn btn-warning" asp-controller="Book" asp-action="Index">All Books</a>
+    }
+    else
+    {
+        <a class="btn btn-outline-warning" asp-controller="Book" asp-action="Index">All Books</a>
+    }
+
+    @foreach (var category in Model.MenuElements)
+    {
+        if (category != Model.ActiveCategory)
+        {
+            <a class="btn btn-outline-warning" asp-controller="Book" asp-action="Index" asp-route-category="@category">@category</a>
+        }
+        else
+        {
+            <a class="btn btn-warning" asp-controller="Book" asp-action="Index" asp-route-category="@category">@category</a>
+        }
+    }
+</div>
+   

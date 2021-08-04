@@ -1,0 +1,40 @@
+@model IEnumerable<Microsoft.AspNetCore.Identity.IdentityRole>
+
+@{ 
+    Layout = "AdminLayout";
+}
+
+<div class="alert alert-dismissible alert-primary m-3">
+    <h4 align="center">Roles in the system</h4>
+</div>
+
+<table class="table table-bordered table-hover">
+    <tr>
+        <th>Role ID</th>
+        <th>Name</th>
+        <th>Users</th>
+        <th>Actions</th>
+    </tr>
+    @if (!Model.Any())
+    {
+        <tr>
+            <td colspan="4">No roles</td>
+        </tr>
+    }
+    else
+    {
+        foreach (var role in Model)
+        {
+            <tr>
+                <td>@role.Id</td>
+                <td>@role.Name</td>
+                <td role-users="@role.Id"></td>
+                <td>
+                    <a class="btn btn-success" asp-action="Edit" asp-route-roleId="@role.Id">Edit</a>
+                </td>
+            </tr>
+        }
+    }
+</table>
+
+<a class="btn btn-primary" asp-action="Create">Create new role</a>

@@ -1,0 +1,49 @@
+﻿@using LibraryTechWebApp.Helpers
+@model LibraryTechWebApp.Models.BookModel
+
+
+<div class="card border-light col-lg-3 mb-4 mx-2">
+    @*<h5 class="card-header text-center">@Model.Title</h5>*@
+
+    <div class="card-body" style="transform: rotate(0)">
+        <a asp-controller="Book" asp-action="ShowBookInformation" asp-route-bookId="@Model.BookId" class="stretched-link"></a>
+        <h5 class="card-title">@Model.Title</h5>
+        <h6 class="card-subtitle text-muted">@Model.Authors</h6>
+    </div>
+
+
+    <div class="card-body" style="transform: rotate(0)">
+        <a asp-controller="Book" asp-action="ShowBookInformation" asp-route-bookId="@Model.BookId" class="stretched-link"></a>
+        <img src="~/Books/Covers/@Model.ImageUrl" class="d-block user-select-none" clss="img-thumbnail d-block user-select-none" width="100%" height="100%">
+    </div>
+
+
+
+    <div class="card-body" style="transform: rotate(0)">
+        <a asp-controller="Book" asp-action="ShowBookInformation" asp-route-bookId="@Model.BookId" class="stretched-link"></a>
+        <p class="card-text">@Model.Description</p>
+    </div>
+
+
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item">@Model.Price.ToString("c")</li>
+        @*<li class="list-group-item">Dapibus ac facilisis in</li>
+            <li class="list-group-item">Vestibulum at eros</li>*@
+    </ul>
+
+    <div class="card-body">   
+        <a book-id="@Model.BookId" return-url="@ViewContext.HttpContext.Request.PathAndQuery()"></a>
+
+        @if (Model.IsAvailableBySubs == true)
+        {
+            <a asp-controller="PersonalAccount" asp-action="ReadBookBySubscription" asp-route-bookId="@Model.BookId" class="card-link btn btn-outline-warning">Read by subscription</a>
+        }
+
+    </div>
+
+    @*<div class="card-footer text-muted">
+            2 days ago
+        </div>*@
+</div>
+
+

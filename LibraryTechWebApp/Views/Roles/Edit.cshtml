@@ -1,0 +1,55 @@
+@model AppRoleEditModel
+
+@{ 
+    Layout = "AdminLayout";
+}
+
+<div class="alert alert-dismissible alert-primary m-3">
+    <h5 align="center">"Assign Users to Roles '@Model.Role.Name'"</h5>
+</div>
+
+<form asp-action="Edit" method="post">
+    <input type="hidden" name="roleName" value="@Model.Role.Name">
+    <input type="hidden" name="roleId" value="@Model.Role.Id">
+    <table class="table table-hover">
+        <tr>
+            <th>Username</th>
+            <th>Is in the role</th>
+        </tr>
+        @if (Model.Members.Count == 0 && Model.NonMembers.Count == 0)
+        {
+            <tr>
+                <td colspan="2">Not users in system</td>
+            </tr>
+        }
+        else
+        {
+            @foreach (var user in Model.Members)
+            {
+                <tr class="table-danger">
+                    <td>@user.UserName</td>
+                    <td>
+                        <div class="form-check form-switch">
+                            <input type='hidden' value="@user.Id" name="IdsToDelite" disabled id="h_@user.Id">
+                            <input class="form-check-input" type="checkbox" onclick="agreeForm('c_@user.Id', 'h_@user.Id')" id="c_@user.Id" checked="">
+                        </div>
+                    </td>
+                </tr>
+            }
+            @foreach (var user in Model.NonMembers)
+            {
+                <tr class="table-danger">
+                    <td>@user.UserName</td>
+                    <td>
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" name="IdsToAdd" value="@user.Id" id="flexSwitchCheckDefault">
+                        </div>
+                    </td>
+                </tr>
+            }
+        }
+    </table>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+    <a class="btn btn-danger" asp-action="Index">Cancel</a>
+</form>

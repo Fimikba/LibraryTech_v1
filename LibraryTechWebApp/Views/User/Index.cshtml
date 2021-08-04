@@ -1,0 +1,35 @@
+@using LibraryTechWebApp.Domains
+@model IEnumerable<AppUserModel>
+
+@{ 
+    Layout = "AdminLayout";
+}
+
+<div class="alert alert-dismissible alert-primary m-3">
+    <h4 align="center">Users in the system</h4>
+</div>
+
+<table class="table table-bordered table-hover">
+    <tr>
+        <td>Id</td>
+        <td>Name</td>
+        <td>Email</td>
+    </tr>
+    @if (!Model.Any())
+    {
+        <tr><td colspan="3">No users</td></tr>
+    }
+    else
+    {
+        @foreach (AppUserModel user in Model)
+        {
+            <tr>
+                <td>@user.Id</td>
+                <td>@user.UserName</td>
+                <td>@user.Email</td>
+            </tr>
+        }
+    }
+</table>
+
+<a class="btn btn-primary" asp-controller="User" asp-action="CreateForAdmin">Create user</a>

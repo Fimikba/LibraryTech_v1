@@ -1,0 +1,38 @@
+﻿@{
+    ViewData["Title"] = "Select tariff plan";
+}
+
+<h3 class="text-center">Select tariff for subscription</h3>
+<hr />
+    <div class="row justify-content-md-center">
+        <div class="col-md-3 mx-1">
+            <div class="card bg-light mb-3 " style="max-width: 20rem; transform: rotate(0);">
+                <div class="card-header">Start</div>
+                <div class="card-body">
+                    <h4 class="card-title">1 month unlimited subscription for $20</h4>
+                    <p class="card-text"></p>
+                </div>
+                <a asp-controller="PersonalAccount" asp-action="Subscribing" asp-route-tariffPlan="1" class="stretched-link"></a>
+            </div>
+        </div>
+        <div class="col-md-3 mx-1">
+            <div class="card bg-success mb-3" style="max-width: 20rem; transform: rotate(0);">
+                <div class="card-header">Secondary</div>
+                <div class="card-body">
+                    <h4 class="card-title">6 month unlimited subscription for $84 ($14 per month)</h4>
+                    <p class="card-text">&ndash; (-10%) on the purchase of any books</p>
+                </div>
+                <a asp-controller="PersonalAccount" asp-action="Subscribing" asp-route-tariffPlan="2" class="stretched-link"></a>
+            </div>
+        </div>
+        <div class="col-md-3 mx-1">
+            <div class="card bg-primary mb-3" style="max-width: 20rem; transform: rotate(0);">
+                <div class="card-header">Ultra</div>
+                <div class="card-body">
+                    <h4 class="card-title">12 month unlimited subscription for $120 ($10 per month)</h4>
+                    <p class="card-text">&ndash; (-20%) on the purchase of any books</p>
+                </div>
+                <a asp-controller="PersonalAccount" asp-action="Subscribing" asp-route-tariffPlan="3" class="stretched-link"></a>
+            </div>
+        </div>
+    </div>

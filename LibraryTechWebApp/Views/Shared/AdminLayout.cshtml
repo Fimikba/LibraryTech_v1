@@ -1,0 +1,84 @@
+﻿@using LibraryTechWebApp.Helpers
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - LibraryTech</title>
+    <link rel="shortcut icon" href="~/favicon.png" type="image/x-icon" />
+    <link rel="stylesheet" href="~/lib/bootstrap-dark/css/bootstrap.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+
+    <script>
+        function agreeForm(checkbox, hiden) {
+            if (document.getElementById(checkbox).checked) {
+                document.getElementById(hiden).disabled = true;
+            } else {
+                document.getElementById(hiden).disabled = false;
+            }
+        }
+    </script>
+
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+            <div class="container-fluid">
+                <img src="~/logo.png" clss="img-thumbnail" width="50" height="40">
+                <a class="navbar-brand" asp-controller="Admin" asp-action="Index">LIBRARYTECH</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarColor02">
+                    <ul class="navbar-nav me-auto">
+                        <div class="bs-component">
+                            <div class="btn-group">
+                                <a asp-controller="User" asp-action="Index" class="btn btn-outline-light">Users control</a>
+                                <a asp-controller="Roles" asp-action="Index" class="btn btn-outline-light">Roles control</a>
+                            </div>
+                            <div class="btn-group">
+                                <a asp-controller="Book" asp-action="AddBook" class="btn btn-outline-light">Add book</a>
+                                <a asp-controller="Book" asp-action="TopSellingStatistics" class="btn btn-outline-light">Statistic top selling</a>
+                                <a asp-controller="Book" asp-action="TopReadBySubsStatistics" class="btn btn-outline-light">Statistic top read by subscription</a>
+                            </div>
+                        </div>
+                    </ul>
+                    <div class="bs-component text-right">
+                        <a asp-controller="Account" asp-action="Logout" class="btn btn-outline-danger">Log out</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+   
+    <footer class="border-top footer text-muted navbar-fixed-bottom">
+        <div class="container">
+            <div class="row justify-content-md-center">
+                <div class="col-md-auto">
+                    <a class="btn btn-outline-light btn-sm" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                </div>
+                <div class="col-md-auto">
+                    <a class="btn btn-outline-light btn-sm" asp-area="" asp-controller="Home" asp-action="Privacy">About us</a>
+                </div>
+                <div class="col-md-auto">
+                    <a class="btn btn-outline-light btn-sm" asp-area="" asp-controller="Home" asp-action="Privacy">Contact</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="container text-center">
+            &copy; Copyriting 2021 - LibraryTech. All Right Reserved.
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap-dark/js/bootstrap.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

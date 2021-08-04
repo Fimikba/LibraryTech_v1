@@ -1,0 +1,15 @@
+﻿@model MenuCategoriesOrSeriesModel
+
+@foreach (var series in Model.MenuElements)
+{
+    if (series != Model.ActiveSeries)
+    {
+        <a class="btn btn-outline-warning btn-sm" asp-controller="Book" asp-action="Index"
+           asp-route-category="@Model.ActiveCategory" asp-route-series="@series">@series</a>
+    }
+    else
+    {
+        <a class="btn btn-warning btn-sm" asp-controller="Book" asp-action="Index"
+             asp-route-category="@Model.ActiveCategory" asp-route-series="@series">@series</a>
+    }
+}

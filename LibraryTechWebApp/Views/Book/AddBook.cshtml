@@ -1,0 +1,143 @@
+﻿@model LibraryTechWebApp.Models.BookAddModel
+
+@{
+    ViewData["Title"] = "Add Book";
+    Layout = "AdminLayout";
+}
+
+<div class="text-center">
+    <h1>Add book</h1>
+</div>
+
+<hr />
+
+<div class="container">
+    <form asp-action="AddBook" enctype="multipart/form-data">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="row justify-content-md-center">
+            <div class="col-5">
+                <div class="text-center">
+                    <h4>Book description</h4>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Title" class="control-label"></label>
+                    <input asp-for="Title" class="form-control" />
+                    <span asp-validation-for="Title" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Language" class="control-label"></label>
+                    <input asp-for="Language" class="form-control" />
+                    <span asp-validation-for="Language" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Authors" class="control-label"></label>
+                    <input asp-for="Authors" class="form-control" />
+                    <span asp-validation-for="Authors" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Categories" class="control-label"></label>
+                    <input asp-for="Categories" class="form-control" />
+                    <span asp-validation-for="Categories" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Series" class="control-label"></label>
+                    <input asp-for="Series" class="form-control" />
+                    <span asp-validation-for="Series" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Genre" class="control-label"></label>
+                    <input asp-for="Genre" class="form-control" />
+                    <span asp-validation-for="Genre" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Description" class="control-label"></label>
+                    @if (Model == null)
+                    {
+                        <textarea class="form-control" type="text" id="Description" name="Description" value="" rows="3"></textarea>
+                    }
+                    else
+                    {
+                        <textarea class="form-control" type="text" id="Description" name="Description" value="@Model.Description" rows="3"></textarea>
+                    }
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="AgeLimit" class="control-label"></label>
+                    <input asp-for="AgeLimit" class="form-control" />
+                    <span asp-validation-for="AgeLimit" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="DateOfWriting" type="date" class="control-label"></label>
+                    <input asp-for="DateOfWriting" type="date" class="form-control" />
+                    <span asp-validation-for="DateOfWriting" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="BookVolume" class="control-label"></label>
+                    <input asp-for="BookVolume" class="form-control" />
+                    <span asp-validation-for="BookVolume" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ISBN10" class="control-label"></label>
+                    <input asp-for="ISBN10" class="form-control" />
+                    <span asp-validation-for="ISBN10" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ISBN13" class="control-label"></label>
+                    <input asp-for="ISBN13" class="form-control" />
+                    <span asp-validation-for="ISBN13" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Publisher" class="control-label"></label>
+                    <input asp-for="Publisher" class="form-control" />
+                    <span asp-validation-for="Publisher" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Price" class="control-label"></label>
+                    <input asp-for="Price" class="form-control" />
+                    <span asp-validation-for="Price" class="text-danger"></span>
+                </div>
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="IsAvailableBySubs" /> @Html.DisplayNameFor(model => model.IsAvailableBySubs)
+                    </label>
+                </div>
+            </div>
+            <div class="col-5">
+                <div class="text-center">
+                    <h4>Files to add</h4>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Cover" class="control-label"></label>
+                    <input asp-for="Cover" class="form-control" />
+                    <span asp-validation-for="Cover" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="FullBookFile" class="control-label"></label>
+                    <input asp-for="FullBookFile" class="form-control" />
+                    <span asp-validation-for="FullBookFile" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="DemoBookFile" class="control-label"></label>
+                    <input asp-for="DemoBookFile" class="form-control" />
+                    <span asp-validation-for="DemoBookFile" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        <h4></h4>
+        <div class="form-group text-center">
+            <input type="submit" value="Add" class="btn btn-primary" />
+        </div>
+    </form>
+</div>
+</div>
+
+
+
+
+
+
+
+
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }

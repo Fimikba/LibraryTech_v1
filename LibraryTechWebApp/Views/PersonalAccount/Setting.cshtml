@@ -1,0 +1,29 @@
+﻿@using LibraryTechWebApp.Domains
+@model AppUserModel
+
+@{
+    ViewData["Title"] = "Profile";
+    Layout = "PersonalAccountLayout";
+    string tariff = "";
+    if (Model.SubsTariff == 1) tariff = "Start";
+    else if (Model.SubsTariff == 2) tariff = "Secondary";
+    else if (Model.SubsTariff == 3) tariff = "Ultra";
+}
+
+<h1></h1>
+<h3 class="text-center">Setting</h3>
+<hr />
+
+<div class="text-center">
+    <div class="btn-group-vertical">
+        @if (Model.IsSubscription == false)
+        {
+            <a asp-controller="PersonalAccount" asp-action="Subscribing" class="btn btn-info">Buy subscription</a>
+        }
+        else
+        {
+            <button type="button" class="btn btn-info disabled">Your subscription: @tariff</button>
+        }
+        <a asp-controller="Account" asp-action="Logout" class="btn btn-danger">Log out</a>
+    </div>
+</div>

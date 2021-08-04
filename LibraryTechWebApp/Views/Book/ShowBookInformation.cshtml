@@ -1,0 +1,107 @@
+﻿@using LibraryTechWebApp.Helpers
+@model LibraryTechWebApp.Models.ShowBookModel
+
+@{
+    ViewData["Title"] = "ShowBookInformation";
+}
+
+<h1>@Model.Book.Title</h1>
+@foreach (var series in Model.Book.Series)
+{
+    <a asp-controller="Book" asp-action="Index" asp-route-series="@series.Name" class="badge bg-secondary">@series.Name </a>
+}
+<hr />
+
+<div class="row">
+    <div class="col-lg-4 text-center">
+        <img src="~/Books/Covers/@Model.Book.ImageUrl" class="d-block user-select-none" clss="img-thumbnail d-block user-select-none" width="100%" height="100%">
+        <h1></h1>
+        <a asp-controller="Book" asp-action="GetDemo" asp-route-BookId="@Model.Book.BookId" class="btn btn-primary">Get demo</a>
+    </div>
+    <div class="col-lg-8">
+        <dl class="row">
+            <dt class="col-sm-2">
+                Authors
+            </dt>
+            <dd class="col-sm-10">
+                @foreach (var author in Model.Book.Authors)
+                {
+                    <a asp-controller="Book" asp-action="Index" asp-route-author="@author.Name" class="badge bg-secondary">@author.Name </a>
+                }
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Book.Language)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Book.Language)
+            </dd>
+            <dt class="col-sm-2">
+                Age limit
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Book.AgeLimit)
+            </dd>
+            <dt class="col-sm-2">
+                Released per LibraryTech
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Book.ReleasedPerLibraryTech)
+            </dd>
+            <dt class="col-sm-2">
+                Date of writing
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Book.DateOfWriting)
+            </dd>
+            <dt class="col-sm-2">
+                Book volume
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Book.BookVolume) pages
+            </dd>
+            <dt class="col-sm-2">
+                ISBN-10
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Book.ISBN10)
+            </dd>
+            @if (Model.Book.ISBN13 != null)
+            {
+                <dt class="col-sm-2">
+                    ISBN-13
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Book.ISBN13)
+                </dd>
+            }
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Book.Publisher)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Book.Publisher)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Book.Price)
+            </dt>
+            <dd class="col-sm-10">
+                @Model.Book.Price.ToString("c")
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Book.Description)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Book.Description)
+            </dd>
+        </dl>
+        <h4></h4>
+        <div class="text-center">
+            <a book-id="@Model.Book.BookId" return-url="@ViewContext.HttpContext.Request.PathAndQuery()"></a>
+
+            @if (Model.Book.IsAvailableBySubs == true)
+            {
+                <a asp-controller="PersonalAccount" asp-action="ReadBookBySubscription" asp-route-bookId="@Model.Book.BookId" class="card-link btn btn-outline-warning">Read by subscription</a>
+            }
+        </div>
+    </div>
+</div>
+

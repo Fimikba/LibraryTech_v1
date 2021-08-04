@@ -1,0 +1,37 @@
+﻿@model LibraryTechWebApp.Models.BooksPageModel
+
+@{ 
+    string title = string.Join(", ", new string[] { Model.Category, Model.Series, Model.Author});
+    ViewData["Title"] = "Books: " + title;
+    ViewData["Series"] = Model.Series;
+    ViewData["Category"] = Model.Category;
+    ViewData["Author"] = Model.Author;
+    if (Model.Author!=null)
+    {
+        Layout = "BookLayoutForAuthorsSort";
+    }
+    else if(Model.Category==null && Model.Series != null)
+    {
+        Layout = "BookLayoutForSeriesSort";
+    }
+    else
+    {
+        Layout = "BookLayout";
+    }
+}
+
+<div>
+    <hr />
+    <div class="bs-component">
+        <div class="row justify-content-center">
+            @foreach (var b in Model.Books)
+            {
+                 @await Html.PartialAsync("BooksPartialView", b)
+            }
+        </div>
+    </div>
+</div>
+
+<div class="row justify-content-md-center">
+    <div page-model="@Model.Info" page-action="Index" class="col-md-auto"></div>
+</div>
